@@ -1,3 +1,5 @@
+matrices={}
+
 def ingreso_matriz():
     matriz=[]
     filas=int(input("Ingrese el ancho el numero de filas: "))
@@ -56,7 +58,7 @@ def determinante_matriz(new_matriz):
     
 def run():
     while True:
-        n=input("1)Sin Multiplicacion \n2)Con multiplicacion \n3)Matriz Ejemplo \n4)Salir\n -------> ")
+        n=input("1)Agregar Matriz \n2)Con multiplicacion \n3)Matriz Ejemplo \n4)Salir\n -------> ")
         if n=="1":
             ingreso_matriz()
         elif n=="2":
