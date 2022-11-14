@@ -65,7 +65,7 @@ def run():
             matriz_ejemplo=[[1,2,3],[4,5,6],[7,8,9]]
             determinante_matriz(matriz_ejemplo)
         elif n=="4":
-            print("Cerrando Aplicacion")
+            print("Cerrando Aplicacion :p")
             break
         else:
             print("Ingrese un valor valido")
