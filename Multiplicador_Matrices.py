@@ -1,25 +1,23 @@
 matrices={}
 
-def ingreso_matriz():
-    matriz=[]
-    filas=int(input("Ingrese el ancho el numero de filas: "))
-    columnas=int(input("Ingrese el numero de columnas: ")) 
-    for i in range(0,filas):
-        matriz.append([])
-        for j in range(0,columnas):
-            print(i,j)
-            matriz[i].append(int(input("Ingrese el valor de ["+str(i)+"]["+str(j)+"]: ")))
-    return matriz
-    
-    
-def multiplicar_Matrices():
-    matrices={}
+def ingreso_matrices():
     while True:
-        matrices[input("Nombre Matriz Creada: ")]=ingreso_matriz()
-        respuesta=input("Crear mas matrices?: y or n ")
+        matriz=[]
+        respuesta=''
+        filas=int(input("Ingrese el ancho del numero de filas: "))
+        columnas=int(input("Ingrese el numero de columnas: ")) 
+        for i in range(0,filas):
+            matriz.append([])
+            for j in range(0,columnas):
+                print(i,j)
+                matriz[i].append(int(input("Ingrese el valor de ["+str(i)+"]["+str(j)+"]: ")))
+        matrices[input("Nombre Matriz Creada: ")]=matriz
+        respuesta=input("Crear mas matrices?: y o n: ---->")
         if respuesta=='n':
             break
-    #print(matriz)
+    
+def multiplicar_Matrices():
+    
     print(matrices)
     new_matriz=[]
     nueva_matriz=[]
@@ -58,9 +56,9 @@ def determinante_matriz(new_matriz):
     
 def run():
     while True:
-        n=input("1)Agregar Matriz \n2)Con multiplicacion \n3)Matriz Ejemplo \n4)Salir\n -------> ")
+        n=input("1)Agregar Matriz \n2)Con multiplicacion \n3)Matriz Ejemplo \n4)Salir\n5)Mostrar Matrices Creadas\n-------> ")
         if n=="1":
-            ingreso_matriz()
+            ingreso_matrices()
         elif n=="2":
             multiplicar_Matrices()
         elif n=="3":
@@ -69,6 +67,10 @@ def run():
         elif n=="4":
             print("Cerrando Aplicacion :p")
             break
+        elif n=="5":
+            for i in matrices.keys():
+                print("---------Nombre Matriz--------\n",i)
+                print(matrices[i])
         else:
             print("Ingrese un valor valido")
         print("Operacion finalizada......")
