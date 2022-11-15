@@ -73,7 +73,7 @@ def run():
                 print(matrices[i])
         else:
             print("Ingrese un valor valido")
-        print("Operacion finalizada......")
+        print("Operacion finalizada......+")
 
 
 if __name__ == '__main__':
