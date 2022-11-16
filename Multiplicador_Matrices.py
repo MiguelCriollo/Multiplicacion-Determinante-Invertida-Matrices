@@ -4,6 +4,7 @@ def ingreso_matrices():
     while True:
         matriz=[]
         respuesta=''
+        nombre_Matriz=""
         filas=int(input("Ingrese el ancho del numero de filas: "))
         columnas=int(input("Ingrese el numero de columnas: ")) 
         for i in range(0,filas):
@@ -11,7 +12,13 @@ def ingreso_matrices():
             for j in range(0,columnas):
                 print(i,j)
                 matriz[i].append(int(input("Ingrese el valor de ["+str(i)+"]["+str(j)+"]: ")))
-        matrices[input("Nombre Matriz Creada: ")]=matriz
+        while True:
+            nombre_Matriz=input("Ingrese el nombre de la matriz: ")
+            if str(matrices.get(nombre_Matriz)) !='None':
+                print("Nombre ya existente, escoja otro.")
+            else:
+                matrices[nombre_Matriz]=matriz
+                break
         respuesta=input("Crear mas matrices?: y o n: ---->")
         if respuesta=='n':
             break
@@ -69,8 +76,10 @@ def run():
             break
         elif n=="5":
             for i in matrices.keys():
-                print("---------Nombre Matriz--------\n",i)
-                print(matrices[i])
+                print("---------",i,"--------\n")
+                for j in matrices[i]:
+                    print(j,"\n")
+                
         else:
             print("Ingrese un valor valido")
         print("Operacion finalizada......+")
