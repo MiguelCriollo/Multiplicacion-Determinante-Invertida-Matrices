@@ -1,5 +1,3 @@
-class numeroNegativo(Exception):
-    pass
 def divisors(num):
     divisors = []
     for i in range(1, num + 1):
@@ -7,16 +5,10 @@ def divisors(num):
             divisors.append(i)
     return divisors
 def run():
-    try:
-        num = int (input ("Ingresa un número: ") )
-        if num<0:
-            raise numeroNegativo
-        print (divisors(num))
-        print ("Terminó mi programa")
-    except ValueError:
-        print("Debes ingresar un numero")
-    except numeroNegativo:
-        print("Debes ingresar un numero positivo")
+    num = int (input ("Ingresa un número: ") )
+    assert num>0 ,"Ingrese numeros positivos"
+    print (divisors(num))
+    print ("Terminó mi programa")
 
 if __name__== '__main__':
     run()

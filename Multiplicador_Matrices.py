@@ -56,34 +56,30 @@ def determinante_matriz(new_matriz):
             positivo=1
             for j in range(0,3):
                 positivo*=new_matriz2[j+i][j]
-        
-    
-        
-
+                
+menu_Principal = {
+	1: ingreso_matrices,
+	2: multiplicar_Matrices,
+    }
     
 def run():
     while True:
-        n=input("1)Agregar Matriz \n2)Con multiplicacion \n3)Matriz Ejemplo \n4)Salir\n5)Mostrar Matrices Creadas\n-------> ")
-        if n=="1":
-            ingreso_matrices()
-        elif n=="2":
-            multiplicar_Matrices()
-        elif n=="3":
-            matriz_ejemplo=[[1,2,3],[4,5,6],[7,8,9]]
-            determinante_matriz(matriz_ejemplo)
-        elif n=="4":
-            print("Cerrando Aplicacion :p")
-            break
-        elif n=="5":
-            for i in matrices.keys():
-                print("---------",i,"--------\n")
-                for j in matrices[i]:
-                    print(j,"\n")
-                
-        else:
-            print("Ingrese un valor valido")
-        print("Operacion finalizada......+")
-
-
+        n=int(input("1)Agregar Matriz \n2)Con multiplicacion \n3)Matriz Ejemplo \n4)Salir\n5)Mostrar Matrices Creadas\n-------> "))
+        try:
+            menu_Principal.get(n)()
+        except:
+            if n==3:
+                matriz_ejemplo=[[1,2,3],[4,5,6],[7,8,9]]
+                determinante_matriz(matriz_ejemplo)
+            elif n==4:
+                print("Cerrando Aplicacion :p")
+                break
+            elif n==5:
+                for i in matrices.keys():
+                    print("---------",i,"--------\n")
+                    for j in matrices[i]:
+                        print(j,"\n")            
+            else:
+                print("Ingrese un valor valido")
 if __name__ == '__main__':
     run()
