@@ -14,7 +14,7 @@ def ingreso_matrices():
                 matriz[i].append(int(input("Ingrese el valor de ["+str(i)+"]["+str(j)+"]: ")))
         while True:
             nombre_Matriz=input("Ingrese el nombre de la matriz: ")
-            if str(matrices.get(nombre_Matriz)) !='None':
+            if nombre_Matriz in matrices.keys():
                 print("Nombre ya existente, escoja otro.")
             else:
                 matrices[nombre_Matriz]=matriz
@@ -56,10 +56,21 @@ def determinante_matriz(new_matriz):
             positivo=1
             for j in range(0,3):
                 positivo*=new_matriz2[j+i][j]
+def Tests():
+    newDict={
+        "Primer1" : [[1,2,3],[4,5,6],[7,8,9]],
+        "Segundo" : [[9,8,7],[6,5,4],[3,2,1]],
+    }
+    if "Primer" in newDict.keys():
+        print("Si hay")
+    else:
+        print("No hay")
+    
                 
 menu_Principal = {
 	1: ingreso_matrices,
 	2: multiplicar_Matrices,
+    6: Tests,
     }
     
 def run():
