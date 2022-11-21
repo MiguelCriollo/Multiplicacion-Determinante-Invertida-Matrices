@@ -1,17 +1,38 @@
+#------------------Clases-------------
+class numeroNegativo(Exception):
+    pass
+#-----------------Variables Globales------------
 diccionario_Matrices={}
 matriz_ejemplo=[[1,2,3],[4,5,6],[7,8,9]]
+#--------------------Metodos----------
+#------------------Aqui se agregan cuantas matrices sean Necesarias---------------
 def ingreso_matrices():
     while True:
-        matriz=[]
-        respuesta=''
-        nombre_Matriz=""
-        filas=int(input("Ingrese el ancho del numero de filas: "))
-        columnas=int(input("Ingrese el numero de columnas: ")) 
+        matriz=[] #Guarda los valores de la matriz antes de agregarla al diccionario
+        while True:
+            try:
+                filas=int(input("Ingrese el ancho del numero de filas: "))
+                columnas=int(input("Ingrese el numero de columnas: ")) 
+                if ((filas or columnas)<=0):
+                    raise numeroNegativo
+                break
+            except (ValueError):
+                print("Valor Numerico Incorrecto")
+            except numeroNegativo:
+                print("No ingrese numeros negativos")
+    
         for i in range(0,filas):
             matriz.append([])
             for j in range(0,columnas):
-                print(i,j)
-                matriz[i].append(int(input("Ingrese el valor de ["+str(i)+"]["+str(j)+"]: ")))
+                while True:
+                    try:   
+                        valor_Matriz=int(input("Ingrese el valor de ["+str(i)+"]["+str(j)+"]: "))
+                        break
+                    except ValueError:
+                        print("Valor Numerico Incorrecto")
+
+                matriz[i].append(valor_Matriz)
+
         while True:
             nombre_Matriz=input("Ingrese el nombre de la matriz: ")
             if nombre_Matriz in diccionario_Matrices.keys():
@@ -22,7 +43,7 @@ def ingreso_matrices():
         respuesta=input("Crear mas matrices?: y o n: ---->")
         if respuesta=='n':
             break
-    
+#------------Multiplicador Matrices(Alpha)--------------
 def multiplicar_Matrices():
     
     print(diccionario_Matrices)
@@ -45,7 +66,7 @@ def multiplicar_Matrices():
             #print("Suma ",suma,"Total",total)
     print("New Matriz: ",nueva_matriz)
     #determinante_matriz(nueva_matriz)
-
+#--------Para encontrar la determinante de una matriz (Alpha)-------------------- 
 def determinante_matriz(new_matriz):
     new_matriz2=new_matriz
     new_matriz2.append(new_matriz[0])
@@ -56,17 +77,7 @@ def determinante_matriz(new_matriz):
             positivo=1
             for j in range(0,3):
                 positivo*=new_matriz2[j+i][j]
-def Tests():
-    newDict={
-        "Primer1" : [[1,2,3],[4,5,6],[7,8,9]],
-        "Segundo" : [[9,8,7],[6,5,4],[3,2,1]],
-    }
-    if "Primer" in newDict.keys():
-        print("Si hay")
-    else:
-        print("No hay")
-    
-                
+#----------------Metodos varios para el menu--------------
 def matrices_Ejemplo():
     diccionario_Matrices["Primer"]=[[1,2,3],[4,5,6],[7,8,9]]
     diccionario_Matrices["Segundo"]=[[9,8,7],[6,5,4],[3,2,1]]
@@ -80,7 +91,17 @@ def mostrar_Matrices():
         for j in diccionario_Matrices[i]:
             print(j,"\n")
 
-    
+def Tests():
+    while True:
+        try:
+            algo=int(input("Ingrese el ancho del numero de filas: "))
+            if algo<=0:
+                raise numeroNegativo
+            break
+        except (ValueError):
+            print("Valor Incorrecto")
+        except numeroNegativo:
+            print("No ingrese numero negativos")
 menu_Principal = {
 	1: ingreso_matrices,
 	2: multiplicar_Matrices,
@@ -90,12 +111,17 @@ menu_Principal = {
     6: Tests,
     }
     
+
+#--------------Bucle Principal------------------------
 def run():
     while True:
-        n=int(input("1)Agregar Matriz \n2)Con multiplicacion \n3)Matrices Ejemplo Llenado \n4)Salir\n5)Mostrar Matrices Creadas\n-------> "))
-        try:
-            menu_Principal.get(n)()
-        except:
-            print("Ingrese un valor valido")
+        while True:
+            try:
+                n=int(input("1)Agregar Matriz \n2)Con multiplicacion \n3)Matrices Ejemplo Llenado \n4)Salir\n5)Mostrar Matrices Creadas\n-------> "))
+                break
+            except ValueError:
+                print("Ingrese un valor correcto")
+        menu_Principal.get(n)()
+
 if __name__ == '__main__':
     run()
