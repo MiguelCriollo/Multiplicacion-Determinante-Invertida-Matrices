@@ -9,6 +9,7 @@ matriz_ejemplo=[[1,2,3],[4,5,6],[7,8,9]]
 def ingreso_matrices():
     while True:
         matriz=[] #Guarda los valores de la matriz antes de agregarla al diccionario
+        #------------Se valida el ingreso de las finas y las columnas----------
         while True:
             try:
                 filas=int(input("Ingrese el ancho del numero de filas: "))
@@ -20,7 +21,8 @@ def ingreso_matrices():
                 print("Valor Numerico Incorrecto")
             except numeroNegativo:
                 print("No ingrese numeros negativos")
-    
+                
+        #----------------Se validan los numeros que van dentro de la matriz a crear----------- 
         for i in range(0,filas):
             matriz.append([])
             for j in range(0,columnas):
@@ -33,6 +35,7 @@ def ingreso_matrices():
 
                 matriz[i].append(valor_Matriz)
 
+        #----------------------Se valida el nombre a colocar para la matriz creada
         while True:
             nombre_Matriz=input("Ingrese el nombre de la matriz: ")
             if nombre_Matriz in diccionario_Matrices.keys():
@@ -43,6 +46,7 @@ def ingreso_matrices():
         respuesta=input("Crear mas matrices?: y o n: ---->")
         if respuesta=='n':
             break
+
 #------------Multiplicador Matrices(Alpha)--------------
 def multiplicar_Matrices():
     
@@ -66,6 +70,7 @@ def multiplicar_Matrices():
             #print("Suma ",suma,"Total",total)
     print("New Matriz: ",nueva_matriz)
     #determinante_matriz(nueva_matriz)
+
 #--------Para encontrar la determinante de una matriz (Alpha)-------------------- 
 def determinante_matriz(new_matriz):
     new_matriz2=new_matriz
@@ -77,20 +82,24 @@ def determinante_matriz(new_matriz):
             positivo=1
             for j in range(0,3):
                 positivo*=new_matriz2[j+i][j]
+
 #----------------Metodos varios para el menu--------------
 def matrices_Ejemplo():
     diccionario_Matrices["Primer"]=[[1,2,3],[4,5,6],[7,8,9]]
     diccionario_Matrices["Segundo"]=[[9,8,7],[6,5,4],[3,2,1]]
-    
+
+#--------------------Cierra la aplicacion--------------
 def cerrar_Aplicacion():
     exit()
 
+#--------------Mostrar en pantalla las matrices que existen-------------
 def mostrar_Matrices():
     for i in diccionario_Matrices.keys():
         print("---------",i,"--------\n")
         for j in diccionario_Matrices[i]:
             print(j,"\n")
 
+#------------Pruebas Metodo---------
 def Tests():
     while True:
         try:
@@ -110,7 +119,6 @@ menu_Principal = {
     5: mostrar_Matrices,
     6: Tests,
     }
-    
 
 #--------------Bucle Principal------------------------
 def run():
