@@ -21,7 +21,7 @@ def ingreso_matrices():
                 print("Valor Numerico Incorrecto")
             except numeroNegativo:
                 print("No ingrese numeros negativos")
-                
+
         #----------------Se validan los numeros que van dentro de la matriz a crear----------- 
         for i in range(0,filas):
             matriz.append([])
@@ -48,6 +48,15 @@ def ingreso_matrices():
             break
 
 #------------Multiplicador Matrices(Alpha)--------------
+def ingreso_Ecuacion():
+    ecuacion=input("Escriba la ecuacion (Validos Solamente: + - * / )\n")
+    posicion=ecuacion.find("+")
+    suma_Matrices(diccionario_Matrices[ecuacion[posicion-1]],diccionario_Matrices[ecuacion[posicion+1]])
+
+    
+def suma_Matrices(MatrizA, MatrizB):
+    print("Me llego Matriz1: ",MatrizA,"\n y tambien Matriz B: ",MatrizB)
+    
 def multiplicar_Matrices():
     
     print(diccionario_Matrices)
@@ -113,7 +122,7 @@ def Tests():
             print("No ingrese numero negativos")
 menu_Principal = {
 	1: ingreso_matrices,
-	2: multiplicar_Matrices,
+	2: ingreso_Ecuacion,
     3: matrices_Ejemplo,
     4: cerrar_Aplicacion,
     5: mostrar_Matrices,
@@ -125,7 +134,7 @@ def run():
     while True:
         while True:
             try:
-                n=int(input("1)Agregar Matriz \n2)Con multiplicacion \n3)Matrices Ejemplo Llenado \n4)Salir\n5)Mostrar Matrices Creadas\n-------> "))
+                n=int(input("1)Agregar Matriz \n2)Ingreso Ecuacion \n3)Matrices Ejemplo Llenado \n4)Salir\n5)Mostrar Matrices Creadas\n-------> "))
                 break
             except ValueError:
                 print("Ingrese un valor correcto")
