@@ -67,30 +67,35 @@ def Tests():
         print("No hay")
     
                 
+def matrices_Ejemplo():
+    diccionario_Matrices["Primer"]=[[1,2,3],[4,5,6],[7,8,9]]
+    diccionario_Matrices["Segundo"]=[[9,8,7],[6,5,4],[3,2,1]]
+    
+def cerrar_Aplicacion():
+    exit()
+
+def mostrar_Matrices():
+    for i in diccionario_Matrices.keys():
+        print("---------",i,"--------\n")
+        for j in diccionario_Matrices[i]:
+            print(j,"\n")
+
+    
 menu_Principal = {
 	1: ingreso_matrices,
 	2: multiplicar_Matrices,
+    3: matrices_Ejemplo,
+    4: cerrar_Aplicacion,
+    5: mostrar_Matrices,
     6: Tests,
     }
     
 def run():
     while True:
-        n=int(input("1)Agregar Matriz \n2)Con multiplicacion \n3)Matriz Ejemplo \n4)Salir\n5)Mostrar Matrices Creadas\n-------> "))
+        n=int(input("1)Agregar Matriz \n2)Con multiplicacion \n3)Matrices Ejemplo Llenado \n4)Salir\n5)Mostrar Matrices Creadas\n-------> "))
         try:
             menu_Principal.get(n)()
         except:
-            if n==3:
-                matriz_ejemplo=[[1,2,3],[4,5,6],[7,8,9]]
-                determinante_matriz(matriz_ejemplo)
-            elif n==4:
-                print("Cerrando Aplicacion :p")
-                break
-            elif n==5:
-                for i in diccionario_Matrices.keys():
-                    print("---------",i,"--------\n")
-                    for j in diccionario_Matrices[i]:
-                        print(j,"\n")            
-            else:
-                print("Ingrese un valor valido")
+            print("Ingrese un valor valido")
 if __name__ == '__main__':
     run()
