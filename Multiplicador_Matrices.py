@@ -55,7 +55,13 @@ def ingreso_Ecuacion():
 
     
 def suma_Matrices(MatrizA, MatrizB):
+    sumaMatriz=[]
     print("Me llego Matriz1: ",MatrizA,"\n y tambien Matriz B: ",MatrizB)
+    for i in range(0,len(MatrizA)-1):
+        for j in range(0,len(MatrizA[0])-1):
+            print(MatrizA[i][j],"+",MatrizB[i][j])
+            sumaMatriz[i].append(MatrizA[i][j]+MatrizB[i][j])
+
     
 def multiplicar_Matrices():
     
@@ -94,8 +100,8 @@ def determinante_matriz(new_matriz):
 
 #----------------Metodos varios para el menu--------------
 def matrices_Ejemplo():
-    diccionario_Matrices["Primer"]=[[1,2,3],[4,5,6],[7,8,9]]
-    diccionario_Matrices["Segundo"]=[[9,8,7],[6,5,4],[3,2,1]]
+    diccionario_Matrices["A"]=[[1,2,3],[4,5,6],[7,8,9]]
+    diccionario_Matrices["B"]=[[9,8,7],[6,5,4],[3,2,1]]
 
 #--------------------Cierra la aplicacion--------------
 def cerrar_Aplicacion():
