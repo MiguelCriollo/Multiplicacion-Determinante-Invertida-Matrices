@@ -1,5 +1,5 @@
-matrices={}
-
+diccionario_Matrices={}
+matriz_ejemplo=[[1,2,3],[4,5,6],[7,8,9]]
 def ingreso_matrices():
     while True:
         matriz=[]
@@ -14,10 +14,10 @@ def ingreso_matrices():
                 matriz[i].append(int(input("Ingrese el valor de ["+str(i)+"]["+str(j)+"]: ")))
         while True:
             nombre_Matriz=input("Ingrese el nombre de la matriz: ")
-            if nombre_Matriz in matrices.keys():
+            if nombre_Matriz in diccionario_Matrices.keys():
                 print("Nombre ya existente, escoja otro.")
             else:
-                matrices[nombre_Matriz]=matriz
+                diccionario_Matrices[nombre_Matriz]=matriz
                 break
         respuesta=input("Crear mas matrices?: y o n: ---->")
         if respuesta=='n':
@@ -25,19 +25,19 @@ def ingreso_matrices():
     
 def multiplicar_Matrices():
     
-    print(matrices)
+    print(diccionario_Matrices)
     new_matriz=[]
     nueva_matriz=[]
     suma=0
-    for i in range(0,len(matrices["primer"])):
+    for i in range(0,len(diccionario_Matrices["primer"])):
         #print("i=",i) #Controla filas
         nueva_matriz.append([])
-        for h in range(0,len((matrices["segundo"][0]))):
+        for h in range(0,len((diccionario_Matrices["segundo"][0]))):
             #print("h=",h)#Controla filas segunda matriz
-            new_matriz=[matrices["segundo"][x][h] for x in range(0,len((matrices["segundo"])))]
+            new_matriz=[diccionario_Matrices["segundo"][x][h] for x in range(0,len((diccionario_Matrices["segundo"])))]
             for x in range(len(new_matriz)):
-                print(matrices["primer"][i][x],"x",new_matriz[x])
-            suma=[matrices["primer"][i][x]*new_matriz[x] for x in range(len(new_matriz))]
+                print(diccionario_Matrices["primer"][i][x],"x",new_matriz[x])
+            suma=[diccionario_Matrices["primer"][i][x]*new_matriz[x] for x in range(len(new_matriz))]
             total=0
             for y in suma:
                 total+=y
@@ -86,9 +86,9 @@ def run():
                 print("Cerrando Aplicacion :p")
                 break
             elif n==5:
-                for i in matrices.keys():
+                for i in diccionario_Matrices.keys():
                     print("---------",i,"--------\n")
-                    for j in matrices[i]:
+                    for j in diccionario_Matrices[i]:
                         print(j,"\n")            
             else:
                 print("Ingrese un valor valido")
