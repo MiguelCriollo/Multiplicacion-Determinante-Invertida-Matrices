@@ -57,8 +57,9 @@ def ingreso_Ecuacion():
 def suma_Matrices(MatrizA, MatrizB):
     sumaMatriz=[]
     print("Me llego Matriz1: ",MatrizA,"\n y tambien Matriz B: ",MatrizB)
-    for i in range(0,len(MatrizA)-1):
-        for j in range(0,len(MatrizA[0])-1):
+    for i in range(0,len(MatrizA)):
+        sumaMatriz.append([])
+        for j in range(0,len(MatrizA[0])):
             print(MatrizA[i][j],"+",MatrizB[i][j])
             sumaMatriz[i].append(MatrizA[i][j]+MatrizB[i][j])
 
@@ -116,16 +117,10 @@ def mostrar_Matrices():
 
 #------------Pruebas Metodo---------
 def Tests():
-    while True:
-        try:
-            algo=int(input("Ingrese el ancho del numero de filas: "))
-            if algo<=0:
-                raise numeroNegativo
-            break
-        except (ValueError):
-            print("Valor Incorrecto")
-        except numeroNegativo:
-            print("No ingrese numero negativos")
+    matrizTest=[]
+    for i in range(0,9):
+        matrizTest.append(i)
+    print(matrizTest)
 menu_Principal = {
 	1: ingreso_matrices,
 	2: ingreso_Ecuacion,
