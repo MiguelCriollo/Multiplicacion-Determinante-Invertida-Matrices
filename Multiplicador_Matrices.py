@@ -49,9 +49,13 @@ def ingreso_matrices():
 
 #------------Multiplicador Matrices(Alpha)--------------
 def ingreso_Ecuacion():
-    ecuacion=input("Escriba la ecuacion (Validos Solamente: + - * / )\n")
-    posicion=ecuacion.find("+")
-    suma_Matrices(diccionario_Matrices[ecuacion[posicion-1]],diccionario_Matrices[ecuacion[posicion+1]])
+    if diccionario_Matrices:
+        print("No existen valores en el diccionario")
+    else:
+        ecuacion=input("Escriba la ecuacion (Validos Solamente: + - * / )\n")
+        posicion=ecuacion.find("+")
+        suma_Matrices(diccionario_Matrices[ecuacion[posicion-1]],diccionario_Matrices[ecuacion[posicion+1]])
+    
 
     
 def suma_Matrices(MatrizA, MatrizB):
@@ -117,10 +121,14 @@ def mostrar_Matrices():
 
 #------------Pruebas Metodo---------
 def Tests():
-    matrizTest=[]
-    for i in range(0,9):
-        matrizTest.append(i)
-    print(matrizTest)
+    matrizTest={}
+    if matrizTest:
+        print("Vacio")
+    else:
+        print("No vacio")
+
+
+
 menu_Principal = {
 	1: ingreso_matrices,
 	2: ingreso_Ecuacion,
