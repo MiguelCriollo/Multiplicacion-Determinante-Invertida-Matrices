@@ -1,22 +1,38 @@
+from random import choice
+
 
 def read():
-    lista_Generada=[]
-    
-    with open("./palabras.txt", "r", encoding="utf-8") as f:
-        lista_Generada=f.read()
+    with open("./palabras.txt", "r", encoding="utf-8") as f:  
+        listaPalabras=f.read().split('\n')
     f.close()
-    #for x in lista_Generada:
-    #    print(x)
-    #    if x=="\n":
-    #        print("Validado")
-    valoresBlancos=[x for x in lista_Generada if x==" "]
-    print(valoresBlancos)
+    return listaPalabras
+
 def separarPalabras():
     pass
         
+def generar_Palabra(lista):
+    palabra=choice(lista)
+    return palabra
+
+
 
 def run():
-    read()
+    palabra=generar_Palabra(read())
+    palabraEscondidaList=list("_"*len(palabra))
+    while True:
+        letraIngresada=input("Ingrese letra")
+        for x ,y in enumerate(palabra):
+            print(f"La posicion de x es={x} y el valor de y es {y}")
+            if y==letraIngresada:
+                palabraEscondidaList[x]=y
+                
 
+        print(" ".join(palabraEscondidaList))
+            
+            
+
+    
+    
+    
 if __name__== '__main__':
     run()
