@@ -6,6 +6,9 @@ def read():
     f.close()
     return listaPalabras
 
+
+
+
 def validacionLetra(palabraEscondidaList):
     while True:
         letraIngresada=input("Ingrese letra")
@@ -35,7 +38,9 @@ def run():
     listaPalabras=read()
 
     palabraGenerada=generar_Palabra(listaPalabras)
+
     palabraEscondidaList=list("_"*len(palabraGenerada))
+    
     print(palabraGenerada)
 
     
