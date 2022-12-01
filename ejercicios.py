@@ -6,19 +6,27 @@ def read():
     f.close()
     return listaPalabras
 
-def validacionLetra():
+def validacionLetra(letrasIncorrectas):
     while True:
-        letraIngresada=input("Ingrese letra")
-        try: #En caso de que la letra sea de un solo char, y de error al convertirla en int significa que es valida
-            if len(letraIngresada)==1:
+        letraIngresada=input("Ingrese letra: ")
+        if len(letraIngresada)!=1:
+            print("Letra ingresada tiene que ser de una sola letra")
+        elif letraIngresada in letrasIncorrectas:
+            print("Letra ingresada anteriormente, trate otra distinta")
+        elif letraIngresada.isdigit():
+            print("Valor ingresado no es una letra")
+        else:
+            return letraIngresada
+
+        '''try: #En caso de que la letra sea de un solo char, y de error al convertirla en int significa que es valida
+            if len(letraIngresada)==1 and letraIngresada not in letrasIncorrectas:
                 letraIngresada=int(letraIngresada)  
         except:
-            print("Letra correcta")
             return letraIngresada
         else:
             #En el caso de que la conversion de la letra a int no de error
             print("No ingrese = (Numeros, no mas de dos letras)")
-            
+        '''    
 def generar_Palabra(lista): #De la lista generada seleccionamos aleatoriamente una palabra
     return choice(lista)
 
@@ -26,12 +34,12 @@ def generar_Palabra(lista): #De la lista generada seleccionamos aleatoriamente u
 def run():
     listaPalabras=read()
     dificultad=[2,5,10]
-    
+    letrasIncorrectas=[]  
+
     print("|Bienvenido a el juego del ahorcado|")
     while True:
 
-        intentos=0
-        print("Elija la dificultad: ")
+        print("------------Elija la dificultad: ---------------")
 
 
         palabraGenerada=generar_Palabra(listaPalabras)
@@ -45,7 +53,7 @@ def run():
         valorDificultad=input("Ingrese------->")
 
         while valorDificultad not in ["1","2","3","4"]:
-            valorDificultad=input("Valor Dificultad incorrecto \n Ingrese nuevamente------->")
+            valorDificultad=input("Valor Dificultad incorrecto \nIngrese nuevamente valor de dificultad------->")
         if valorDificultad=="4":
             print("Juego cerrado correctamente")
             break
@@ -56,11 +64,17 @@ def run():
 
     
 
-                
+        print(" ".join(palabra_a_revelar))     
+         
+        letrasIncorrectas.clear()
         while True: 
-            letraIngresada=validacionLetra()
-            if letraIngresada in palabraGenerada:
-                print("Letra si esta en palabra")
+            
+            letraIngresada=validacionLetra(letrasIncorrectas)
+            if letraIngresada not in palabraGenerada:
+                print("Letra incorrecta")
+                letrasIncorrectas.append(letraIngresada)
+                valorDificultad-=1
+                print(letrasIncorrectas)
 
 
 
@@ -69,11 +83,14 @@ def run():
                 if y==letraIngresada:
                     palabra_a_revelar[x]=y
             print(" ".join(palabra_a_revelar))
-            print(f"Intentos restantes -----> {intentos}")
+            print(f"Intentos restantes -----> {valorDificultad}")
 
             #Cuando se completen todas las palabras restantes:
             if "_" not in palabra_a_revelar:
                 print("Ganaste")
+                break
+            if 0==valorDificultad:
+                print("Intentos maximos agotados")
                 break
             
             
