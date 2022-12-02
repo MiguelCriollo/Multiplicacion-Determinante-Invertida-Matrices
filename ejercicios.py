@@ -6,12 +6,12 @@ def read():
     f.close()
     return listaPalabras
 
-def validacionLetra(letrasIncorrectas):
+def validacionLetra(letrasRepetidas):
     while True:
         letraIngresada=input("Ingrese letra: ")
         if len(letraIngresada)!=1:
             print("Letra ingresada tiene que ser de una sola letra")
-        elif letraIngresada in letrasIncorrectas:
+        elif letraIngresada in letrasRepetidas:
             print("Letra ingresada anteriormente, trate otra distinta")
         elif letraIngresada.isdigit():
             print("Valor ingresado no es una letra")
@@ -19,7 +19,7 @@ def validacionLetra(letrasIncorrectas):
             return letraIngresada
 
         '''try: #En caso de que la letra sea de un solo char, y de error al convertirla en int significa que es valida
-            if len(letraIngresada)==1 and letraIngresada not in letrasIncorrectas:
+            if len(letraIngresada)==1 and letraIngresada not in letrasRepetidas:
                 letraIngresada=int(letraIngresada)  
         except:
             return letraIngresada
@@ -34,7 +34,7 @@ def generar_Palabra(lista): #De la lista generada seleccionamos aleatoriamente u
 def run():
     listaPalabras=read()
     dificultad=[2,5,10]
-    letrasIncorrectas=[]  
+    letrasRepetidas=[]  
 
     print("|Bienvenido a el juego del ahorcado|")
     while True:
@@ -66,15 +66,16 @@ def run():
 
         print(" ".join(palabra_a_revelar))     
          
-        letrasIncorrectas.clear()
+        letrasRepetidas.clear()
         while True: 
             
-            letraIngresada=validacionLetra(letrasIncorrectas)
+            letraIngresada=validacionLetra(letrasRepetidas)
             if letraIngresada not in palabraGenerada:
                 print("Letra incorrecta")
-                letrasIncorrectas.append(letraIngresada)
+                letrasRepetidas.append(letraIngresada)
                 valorDificultad-=1
-                print(letrasIncorrectas)
+                #print(letrasRepetidas)
+            letrasRepetidas.append(letraIngresada)
 
 
 
