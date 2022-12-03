@@ -1,3 +1,4 @@
+import os
 from random import choice
 #////////////Para leer el archivo txt\\\\\\\\\\\\\\\\\\
 def read():
@@ -5,6 +6,12 @@ def read():
         listaPalabras=f.read().split('\n')
     f.close()
     return listaPalabras
+
+
+hombreColgado=[["=","=","=","=","=","=","=","=","=","="],
+               ["|"," "," "," "," "," "," "," "," ","||"],
+               ["|"," "," "," "," "," "," "," "," ","||",]]
+print("".join(hombreColgado[1]))
 
 def validacionLetra(letrasRepetidas):
     while True:
@@ -32,10 +39,10 @@ def generar_Palabra(lista): #De la lista generada seleccionamos aleatoriamente u
 
 
 def run():
+    #os.system("cls")
     listaPalabras=read()
     dificultad=[2,5,10]
     letrasRepetidas=[]  
-
     print("|Bienvenido a el juego del ahorcado|")
     while True:
 
@@ -64,11 +71,18 @@ def run():
 
     
 
-        print(" ".join(palabra_a_revelar))     
+        #print(" ".join(palabra_a_revelar))     
          
         letrasRepetidas.clear()
         while True: 
+            print("len:",len(hombreColgado))
+            for i in range(len(hombreColgado)):
+                print("".join(hombreColgado[i]))
+            print("~"*30)
+            print(" ".join(palabra_a_revelar))
+
             
+
             letraIngresada=validacionLetra(letrasRepetidas)
             if letraIngresada not in palabraGenerada:
                 print("Letra incorrecta")
@@ -83,7 +97,7 @@ def run():
                 #print(f"La posicion de x es={x} y el valor de y es {y}")
                 if y==letraIngresada:
                     palabra_a_revelar[x]=y
-            print(" ".join(palabra_a_revelar))
+            #print(" ".join(palabra_a_revelar))
             print(f"Intentos restantes -----> {valorDificultad}")
 
             #Cuando se completen todas las palabras restantes:
