@@ -6,11 +6,16 @@ def read():
         listaPalabras=f.read().split('\n')
     f.close()
     return listaPalabras
-
-
-hombreColgado=[["=","=","=","=","=","=","=","=","=","="],
-               ["|"," "," "," "," "," "," "," "," ","||"],
-               ["|"," "," "," "," "," "," "," "," ","||",]]
+valoresHombreColgado=["|","|","|","O","/","|","\\","|","/"," \\|"]
+iteradorValoresHombreColgado=[" " for x in range(10)]
+hombreColgado=[["=" for x in range(10)],
+               ["||","\t ","|"],
+               ["||","\t ","|"],
+               ["||","\t ","|"],
+               ["||","\t ","O"],
+               ["||","\t","/|\\"],
+               ["||","\t ","|"],
+               ["||","\t","/ \\"]]
 print("".join(hombreColgado[1]))
 
 def validacionLetra(letrasRepetidas):
