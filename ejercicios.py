@@ -6,17 +6,13 @@ def read():
         listaPalabras=f.read().split('\n')
     f.close()
     return listaPalabras
-valoresHombreColgado=["|","|","|","O","/","|","\\","|","/"," \\|"]
-iteradorValoresHombreColgado=[" " for x in range(10)]
-hombreColgado=[["=" for x in range(10)],
-               ["||","\t ","|"],
-               ["||","\t ","|"],
-               ["||","\t ","|"],
-               ["||","\t ","O"],
-               ["||","\t","/|\\"],
-               ["||","\t ","|"],
-               ["||","\t","/ \\"]]
-print("".join(hombreColgado[1]))
+
+#iteradorValoresHombreColgado=[" " for x in range(10)]
+
+caracteresTemporales="|||O/|\\|/\\"
+#print("String: ", "|||O/|\\|/\\")
+
+
 
 def validacionLetra(letrasRepetidas):
     while True:
@@ -71,27 +67,52 @@ def run():
             break
 
         valorDificultad=dificultad[int(valorDificultad)-1]
+        nivelDificultad=10/valorDificultad
 
         print("Fuera Bucle")
-
-    
+        caracteres=list(" "*10)
+        
 
         #print(" ".join(palabra_a_revelar))     
          
         letrasRepetidas.clear()
+        value=0
         while True: 
+            hombreColgado=[["=" *10],
+               ["||","\t ",caracteres[0]],
+               ["||","\t ",caracteres[1]],
+               ["||","\t ",caracteres[2]],
+               ["||","\t ",caracteres[3]],
+               ["||","\t",caracteres[4],caracteres[5],caracteres[6]],
+               ["||","\t ",caracteres[7]],
+               ["||","\t",caracteres[8]," "+caracteres[9]]]
+    
             print("len:",len(hombreColgado))
             for i in range(len(hombreColgado)):
                 print("".join(hombreColgado[i]))
+            
+            
+
             print("~"*30)
             print(" ".join(palabra_a_revelar))
 
-            
+            if "_" not in palabra_a_revelar:
+                print("Ganaste")
+                break
+            if 0==valorDificultad:
+                print("Intentos maximos agotados")
+                break
 
             letraIngresada=validacionLetra(letrasRepetidas)
             if letraIngresada not in palabraGenerada:
                 print("Letra incorrecta")
                 letrasRepetidas.append(letraIngresada)
+
+
+                for j in range(int(nivelDificultad)):
+                    caracteres[value]=caracteresTemporales[value]
+                    value+=1
+
                 valorDificultad-=1
                 #print(letrasRepetidas)
             letrasRepetidas.append(letraIngresada)
@@ -106,12 +127,7 @@ def run():
             print(f"Intentos restantes -----> {valorDificultad}")
 
             #Cuando se completen todas las palabras restantes:
-            if "_" not in palabra_a_revelar:
-                print("Ganaste")
-                break
-            if 0==valorDificultad:
-                print("Intentos maximos agotados")
-                break
+            
             
             
 
