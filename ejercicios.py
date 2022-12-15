@@ -1,7 +1,6 @@
 import os
 from random import choice
 
-
 #////////////Para leer el archivo txt\\\\\\\\\\\\\\\\\\
 def read():
     with open("./palabras.txt", "r", encoding="utf-8") as f:  
@@ -29,7 +28,6 @@ def validacionLetra(letrasRepetidas):
 def generar_Palabra(lista): #De la lista generada seleccionamos aleatoriamente una palabra
     return choice(lista)
 #//////////////////////////------------------------------------\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
 #/////////////////////////////------Main-----------\\\\\\\\\\\\\\
 def run():
     os.system("cls") #------------------------------Para limpiar datos en consola
@@ -38,24 +36,39 @@ def run():
     letrasRepetidas=[] #----------------------------Lista donde se guardan letras correcta o incorrectas que ya han sido ingresadas
     print("|Bienvenido a el juego del ahorcado|")
     while True:#-----------------------------------------------------Bucle principal, sale solamente si se ingresa desde el menu
+        seIngresa=True
+        nombreJugador=""
         print("------------Elija la dificultad: ---------------")
         palabraGenerada=generar_Palabra(listaPalabras)#--------------Generamos la palabra a usar en esta ronda
         palabra_a_revelar=list("_"*len(palabraGenerada))#------------Creamos una lista de _ dependiendo la longitud de la palabra
-        print("1)Dificil (2 Intentos) \n2)Normal (5 Intentos) \n3)Facil (10 Intentos) \n4)Salir del juego")
-        valorRepeticiones=input("Ingrese------->")
-        while valorRepeticiones not in ["1","2","3","4"]: #-------------Existen 3 grados de dificultad, el 4to es para salir del programa
-            valorRepeticiones=input("Valor Dificultad incorrecto \nIngrese nuevamente valor de dificultad------->")
-        if valorRepeticiones=="4":
+        print("1)Dificil (2 Intentos) \n2)Normal (5 Intentos) \n3)Facil (10 Intentos) \n4)Salir del juego \n5)Modo Competitivo")
+        valorMenu=input("Ingrese------->")
+        while valorMenu not in ["1","2","3","4","5"]:
+            valorMenu=input("Valor Dificultad incorrecto \nIngrese nuevamente valor de dificultad------->")
+
+        while True: #-------------Existen 3 grados de dificultad, el 4to es para salir del programa
+            if valorMenu in ["1","2","3","4"]:
+                valorMenu=dificultad[int(valorMenu)-1] #------Guardamos cuantos intentos tenermos
+                nivelDificultad=10/valorMenu #------------------------Valor de cuantos caracteres mostramos dependiendo de la dificultad
+                caracteres=list(" "*10) #-------------------------------------Elimino la lista de caractes a vacios, este muestra al ahorcado
+                letrasRepetidas.clear() #-------------------------------------Borramos las letras ya ingresadas
+                value=0 #-----------------------------------------------------Value sirve para saber que valores strings agrego a la lista vacia de caracteres
+                os.system("cls")
+                break
+            else:
+                nombreJugador=input("Has elegido el modo Competitivo\nIngresa tu nombre para comenzar (Escribe ""exit"" si deseas cancelar esta accion.)\n------->")
+                if nombreJugador=="exit":
+                    seIngresa=False
+                else:
+                    pass #***************Se debe agregar 3 iteraciones del bucle principal*************
+                break
+        if valorMenu=="4":
             print("Juego Cerrado correctamente")
             break
 
-        valorRepeticiones=dificultad[int(valorRepeticiones)-1] #------Guardamos cuantos intentos tenermos
-        nivelDificultad=10/valorRepeticiones #------------------------Valor de cuantos caracteres mostramos dependiendo de la dificultad
-        caracteres=list(" "*10) #-------------------------------------Elimino la lista de caractes a vacios, este muestra a ahorcadi
-        letrasRepetidas.clear() #-------------------------------------Borramos las letras ya ingresadas
-        value=0 #-----------------------------------------------------Value sirve para saber que valores strings agrego a la lista vacia de caracteres
-        os.system("cls")
-        while True: 
+        print("Nombre: ",nombreJugador)
+        
+        while seIngresa==True: 
             #---------------------------------------------------------Forma hombre colgado
     
             hombreColgado=[["=" *10],
@@ -75,7 +88,7 @@ def run():
             if "_" not in palabra_a_revelar: #------------------------Si se ha completado la palabra a reverlar se gana el juego
                 print("!!!!!!!!!!!!!Ganaste!!!!!!!!!!!!!!!")
                 break
-            if 0==valorRepeticiones: #--------------------------------Si los intentos se acabaron
+            if 0==valorMenu: #--------------------------------Si los intentos se acabaron
                 print("Intentos maximos agotados")
                 break
             
@@ -87,13 +100,13 @@ def run():
                 for j in range(int(nivelDificultad)): #---------------Si la palabra ingresada es incorrecta
                     caracteres[value]=caracteresHombreColgado[value] #Convertimos a los caracteres de la posicion que los toca del string, se repite depende el nivel de dificultad
                     value+=1 
-                valorRepeticiones-=1 #--------------------------------Se reduce las intentos restantes
+                valorMenu-=1 #--------------------------------Se reduce las intentos restantes
             letrasRepetidas.append(letraIngresada) #-----------------Ingresados letra sea correcta o incorrecta a las letras ingresadas
 
             for x ,y in enumerate(palabraGenerada): #----------------Separamos la palabra en una lista de tipo>  [(0,h),(1,o),(2,l),(3,a)]
                 if y==letraIngresada: #------------------------------Si la letra ingresada esta en palabra generada
                     print("✓"*30,"\n!Letra ingresada es Correcta! \n","✓"*30)
                     palabra_a_revelar[x]=y #-------------------------Colocamos la letra resuelta 
-            print(f"Intentos restantes -----> {valorRepeticiones}")
+            print(f"Intentos restantes -----> {valorMenu}")
 if __name__== '__main__':
     run()
