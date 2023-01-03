@@ -28,48 +28,47 @@ def validacionLetra(letrasRepetidas):
 def generar_Palabra(lista): #De la lista generada seleccionamos aleatoriamente una palabra
     return choice(lista)
 #//////////////////////////------------------------------------\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
 #/////////////////////////////------Main-----------\\\\\\\\\\\\\\
 def run():
-    os.system("cls") #------------------------------Para limpiar datos en consola
-    listaPalabras=read() #--------------------------Lectura del archivo txt de las palabras posibles
-    dificultad=[2,5,10] #---------------------------Guarda valor de se elije facil, norma o dificil
-    letrasRepetidas=[] #----------------------------Lista donde se guardan letras correcta o incorrectas que ya han sido ingresadas
+    os.system("cls") #--------------------------------------------------------------------Para limpiar datos en consola
+    listaPalabras=read() #---------------------------------------------------------------Lectura del archivo txt de las palabras posibles
+    dificultad=[2,5,10] #----------------------------------------------------------------Guarda valor de se elije facil, norma o dificil
+    letrasRepetidas=[] #-----------------------------------------------------------------Lista donde se guardan letras correcta o incorrectas que ya han sido ingresadas
     print("|Bienvenido a el juego del ahorcado|")
-    while True:#-----------------------------------------------------Bucle principal, sale solamente si se ingresa desde el menu
+    while True:#-------------------------------------------------------------------------Bucle principal, sale solamente si se ingresa desde el menu
         seIngresa=True
         nombreJugador=""
         print("------------Elija la dificultad: ---------------")
-        palabraGenerada=generar_Palabra(listaPalabras)#--------------Generamos la palabra a usar en esta ronda
-        palabra_a_revelar=list("_"*len(palabraGenerada))#------------Creamos una lista de _ dependiendo la longitud de la palabra
+        
         print("1)Dificil (2 Intentos) \n2)Normal (5 Intentos) \n3)Facil (10 Intentos) \n4)Salir del juego \n5)Modo Competitivo")
         valorMenu=input("Ingrese------->")
         while valorMenu not in ["1","2","3","4","5"]:
             valorMenu=input("Valor Dificultad incorrecto \nIngrese nuevamente valor de dificultad------->")
 
-        while True: #-------------Existen 3 grados de dificultad, el 4to es para salir del programa
-            if valorMenu in ["1","2","3","4"]:
-                valorMenu=dificultad[int(valorMenu)-1] #------Guardamos cuantos intentos tenermos
-                nivelDificultad=10/valorMenu #------------------------Valor de cuantos caracteres mostramos dependiendo de la dificultad
-                caracteres=list(" "*10) #-------------------------------------Elimino la lista de caractes a vacios, este muestra al ahorcado
-                letrasRepetidas.clear() #-------------------------------------Borramos las letras ya ingresadas
-                value=0 #-----------------------------------------------------Value sirve para saber que valores strings agrego a la lista vacia de caracteres
-                os.system("cls")
-                break
-            else:
-                nombreJugador=input("Has elegido el modo Competitivo\nIngresa tu nombre para comenzar (Escribe ""exit"" si deseas cancelar esta accion.)\n------->")
-                if nombreJugador=="exit":
-                    seIngresa=False
-                else:
-                    pass #***************Se debe agregar 3 iteraciones del bucle principal*************
-                break
+
+        if valorMenu=="5":
+            nombreJugador=input("Has elegido el modo Competitivo\nIngresa tu nombre para comenzar (Escribe ""exit"" si deseas cancelar esta accion.)\n------->")
+            if nombreJugador=="exit":
+                seIngresa=False
+            valorMenu="2"
         if valorMenu=="4":
             print("Juego Cerrado correctamente")
             break
+        if seIngresa==True:
+            valorMenu=dificultad[int(valorMenu)-1] #---------------------------------Guardamos cuantos intentos tenermos
+            nivelDificultad=10/valorMenu #-------------------------------------------Valor de cuantos caracteres mostramos dependiendo de la dificultad
+            caracteres=list(" "*10) #------------------------------------------------Elimino la lista de caractes a vacios, este muestra al ahorcado
+            letrasRepetidas.clear() #------------------------------------------------Borramos las letras ya ingresadas
+            value=0 #----------------------------------------------------------------Value sirve para saber que valores strings agrego a la lista vacia de caracteres
+            os.system("cls")
+            palabraGenerada=generar_Palabra(listaPalabras)#----------------------------------Generamos la palabra a usar en esta ronda
+            palabra_a_revelar=list("_"*len(palabraGenerada))#--------------------------------Creamos una lista de _ dependiendo la longitud de la palabra
+            print("Ayuda: ",palabraGenerada)
 
-        print("Nombre: ",nombreJugador)
-        
+            print("Nombre: ",nombreJugador)
         while seIngresa==True: 
-            #---------------------------------------------------------Forma hombre colgado
+            #------------------------------------------------------------------------Forma hombre colgado
     
             hombreColgado=[["=" *10],
                ["||","\t ",caracteres[0]],
@@ -79,34 +78,35 @@ def run():
                ["||","\t",caracteres[4],caracteres[5],caracteres[6]],
                ["||","\t ",caracteres[7]],
                ["||","\t",caracteres[8]," "+caracteres[9]]]
-            for i in range(len(hombreColgado)): #---------------------Mostramos el hombre colgado
+            for i in range(len(hombreColgado)): #------------------------------------Mostramos el hombre colgado
                 print("".join(hombreColgado[i]))
 
-            print("~"*30) #-------------------------------------------Imprimimos secuencia d signos
-            print(" ".join(palabra_a_revelar)) #----------------------Mostramos el estado de la palabra a revelar
+            print("~"*30) #----------------------------------------------------------Imprimimos secuencia d signos
+            print(" ".join(palabra_a_revelar)) #-------------------------------------Mostramos el estado de la palabra a revelar
 
-            if "_" not in palabra_a_revelar: #------------------------Si se ha completado la palabra a reverlar se gana el juego
+            if "_" not in palabra_a_revelar: #---------------------------------------Si se ha completado la palabra a reverlar se gana el juego
                 print("!!!!!!!!!!!!!Ganaste!!!!!!!!!!!!!!!")
                 break
-            if 0==valorMenu: #--------------------------------Si los intentos se acabaron
+            if 0==valorMenu: #-------------------------------------------------------Si los intentos se acabaron
                 print("Intentos maximos agotados")
+                print("\nPalabra correcta: \n",palabraGenerada)
                 break
             
-            #---------Este bucle sirve para colocar las partes del ahorcado dependiendo de su dificultad
-            letraIngresada=validacionLetra(letrasRepetidas)#----------Validamos que la letra ingresada se valida
+            #------------------------------------------------------------------------Este bucle sirve para colocar las partes del ahorcado dependiendo de su dificultad
+            letraIngresada=validacionLetra(letrasRepetidas)#-------------------------Validamos que la letra ingresada sea valida
             os.system("cls")
-            if letraIngresada not in palabraGenerada: #---------------Si damos una letra incorrecta esta se agrega a las repetidas
+            if letraIngresada not in palabraGenerada: #------------------------------Si damos una letra incorrecta esta se agrega a las repetidas
                 print("X"*30,"\n!Letra ingresada es Incorrecta! \n","X"*30)
-                for j in range(int(nivelDificultad)): #---------------Si la palabra ingresada es incorrecta
-                    caracteres[value]=caracteresHombreColgado[value] #Convertimos a los caracteres de la posicion que los toca del string, se repite depende el nivel de dificultad
+                for j in range(int(nivelDificultad)): #------------------------------Si la palabra ingresada es incorrecta
+                    caracteres[value]=caracteresHombreColgado[value] #---------------Convertimos a los caracteres de la posicion que los toca del string, se repite depende el nivel de dificultad
                     value+=1 
-                valorMenu-=1 #--------------------------------Se reduce las intentos restantes
-            letrasRepetidas.append(letraIngresada) #-----------------Ingresados letra sea correcta o incorrecta a las letras ingresadas
+                valorMenu-=1 #-------------------------------------------------------Se reduce las intentos restantes
+            letrasRepetidas.append(letraIngresada) #---------------------------------Ingresados letra sea correcta o incorrecta a las letras ingresadas
 
-            for x ,y in enumerate(palabraGenerada): #----------------Separamos la palabra en una lista de tipo>  [(0,h),(1,o),(2,l),(3,a)]
-                if y==letraIngresada: #------------------------------Si la letra ingresada esta en palabra generada
+            for x ,y in enumerate(palabraGenerada): #--------------------------------Separamos la palabra en una lista de tipo>  [(0,h),(1,o),(2,l),(3,a)]
+                if y==letraIngresada: #----------------------------------------------Si la letra ingresada esta en palabra generada
                     print("✓"*30,"\n!Letra ingresada es Correcta! \n","✓"*30)
-                    palabra_a_revelar[x]=y #-------------------------Colocamos la letra resuelta 
+                    palabra_a_revelar[x]=y #-----------------------------------------Colocamos la letra resuelta 
             print(f"Intentos restantes -----> {valorMenu}")
 if __name__== '__main__':
     run()
