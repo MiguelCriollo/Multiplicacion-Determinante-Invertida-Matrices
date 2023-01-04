@@ -71,17 +71,12 @@ def run():
             os.system("cls")
             palabraGenerada=generar_Palabra(listaPalabras)#----------------------------------Generamos la palabra a usar en esta ronda
             palabra_a_revelar=list("_"*len(palabraGenerada))#--------------------------------Creamos una lista de _ dependiendo la longitud de la palabra
+            os.system("cls")
             print("Ayuda: ",palabraGenerada)
 
             print("Nombre: ",nombreJugador)
         while seIngresa==True and contadorCompetitivo!=0: 
-
-        
-                
-
-
-
-
+            
             #------------------------------------------------------------------------Forma hombre colgado
     
             hombreColgado=[["=" *10],
@@ -99,25 +94,32 @@ def run():
             print(" ".join(palabra_a_revelar)) #-------------------------------------Mostramos el estado de la palabra a revelar
 
             if "_" not in palabra_a_revelar: #---------------------------------------Si se ha completado la palabra a reverlar se gana el juego
+                os.system("cls")
                 print("!!!!!!!!!!!!!Palabra Correcta!!!!!!!!!!!!!!!")
+                
                 if modoCompetitivo==False:
                     break
                 else:
                     contadorCompetitivo-=1
+                    valorMenu=5
+                    print("Siguente Palabra...")
             if 0==valorMenu: #-------------------------------------------------------Si los intentos se acabaron
+                os.system("cls")
                 print("Intentos maximos agotados")
-                print("\nPalabra correcta: \n",palabraGenerada)
+                
+                print("\nPalabra correcta: \n",palabraGenerada,"\n")
                 if modoCompetitivo==False:
                     break
                 else:
                     contadorCompetitivo-=1
+                    valorMenu=5
+                    print("Siguente Palabra...")
                 
             if contadorCompetitivo!=auxContadorCompetitivo:
                 palabraGenerada=generar_Palabra(listaPalabras)#----------------------------------Generamos la palabra a usar en esta ronda
                 palabra_a_revelar=list("_"*len(palabraGenerada))#--------------------------------Creamos una lista de _ dependiendo la longitud de la palabra
                 caracteres=list(" "*10) #------------------------------------------------Elimino la lista de caractes a vacios, este muestra al ahorcado
                 letrasRepetidas.clear() #------------------------------------------------Borramos las letras ya ingresadas
-                os.system("cls")
                 print("Ayuda: ",palabraGenerada)
                 auxContadorCompetitivo=contadorCompetitivo
                 
