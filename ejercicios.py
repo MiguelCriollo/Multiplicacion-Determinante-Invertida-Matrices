@@ -31,7 +31,7 @@ def generar_Palabra(lista): #De la lista generada seleccionamos aleatoriamente u
 
 #/////////////////////////////------Main-----------\\\\\\\\\\\\\\
 def run():
-    os.system("cls") #--------------------------------------------------------------------Para limpiar datos en consola
+    #os.system("cls") #--------------------------------------------------------------------Para limpiar datos en consola
     listaPalabras=read() #---------------------------------------------------------------Lectura del archivo txt de las palabras posibles
     dificultad=[2,5,10] #----------------------------------------------------------------Guarda valor de se elije facil, norma o dificil
     letrasRepetidas=[] #-----------------------------------------------------------------Lista donde se guardan letras correcta o incorrectas que ya han sido ingresadas
@@ -68,14 +68,14 @@ def run():
             caracteres=list(" "*10) #------------------------------------------------Elimino la lista de caractes a vacios, este muestra al ahorcado
             letrasRepetidas.clear() #------------------------------------------------Borramos las letras ya ingresadas
             value=0 #----------------------------------------------------------------Value sirve para saber que valores strings agrego a la lista vacia de caracteres
-            os.system("cls")
+            #os.system("cls")
             palabraGenerada=generar_Palabra(listaPalabras)#----------------------------------Generamos la palabra a usar en esta ronda
             palabra_a_revelar=list("_"*len(palabraGenerada))#--------------------------------Creamos una lista de _ dependiendo la longitud de la palabra
-            os.system("cls")
+            #os.system("cls")
             print("Ayuda: ",palabraGenerada)
 
             print("Nombre: ",nombreJugador)
-        while seIngresa==True and contadorCompetitivo!=0: 
+        while seIngresa==True: 
             
             #------------------------------------------------------------------------Forma hombre colgado
     
@@ -94,26 +94,29 @@ def run():
             print(" ".join(palabra_a_revelar)) #-------------------------------------Mostramos el estado de la palabra a revelar
 
             if "_" not in palabra_a_revelar: #---------------------------------------Si se ha completado la palabra a reverlar se gana el juego
-                os.system("cls")
+                #os.system("cls")
                 print("!!!!!!!!!!!!!Palabra Correcta!!!!!!!!!!!!!!!")
-                
-                if modoCompetitivo==False:
+                contadorCompetitivo-=1
+                if modoCompetitivo==False or contadorCompetitivo==0:
                     break
                 else:
-                    contadorCompetitivo-=1
+                    
                     valorMenu=5
                     print("Siguente Palabra...")
+                value=0
             if 0==valorMenu: #-------------------------------------------------------Si los intentos se acabaron
-                os.system("cls")
+                #os.system("cls")
                 print("Intentos maximos agotados")
                 
                 print("\nPalabra correcta: \n",palabraGenerada,"\n")
-                if modoCompetitivo==False:
+                contadorCompetitivo-=1
+                if modoCompetitivo==False or contadorCompetitivo==0:
                     break
                 else:
-                    contadorCompetitivo-=1
+                    
                     valorMenu=5
                     print("Siguente Palabra...")
+                value=0
                 
             if contadorCompetitivo!=auxContadorCompetitivo:
                 palabraGenerada=generar_Palabra(listaPalabras)#----------------------------------Generamos la palabra a usar en esta ronda
@@ -125,7 +128,7 @@ def run():
                 
             else:
                 letraIngresada=validacionLetra(letrasRepetidas)#-------------------------Validamos que la letra ingresada sea valida
-                os.system("cls")
+                #os.system("cls")
                 if letraIngresada not in palabraGenerada: #------------------------------Si damos una letra incorrecta esta se agrega a las repetidas
                     print("X"*30,"\n!Letra ingresada es Incorrecta! \n","X"*30)
                     for j in range(int(nivelDificultad)): #------------------------------Si la palabra ingresada es incorrecta
@@ -136,6 +139,7 @@ def run():
 
                 for x ,y in enumerate(palabraGenerada): #--------------------------------Separamos la palabra en una lista de tipo>  [(0,h),(1,o),(2,l),(3,a)]
                     if y==letraIngresada: #----------------------------------------------Si la letra ingresada esta en palabra generada
+                        #os.system("cls")
                         print("✓"*30,"\n!Letra ingresada es Correcta! \n","✓"*30)
                         palabra_a_revelar[x]=y #-----------------------------------------Colocamos la letra resuelta 
                 print(f"Intentos restantes -----> {valorMenu}")
