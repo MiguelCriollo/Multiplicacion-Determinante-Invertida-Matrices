@@ -60,7 +60,20 @@ def run():
                 modoCompetitivo=False
             else:
                 modoCompetitivo=True
+                print("------------Elija la dificultad para el modo competitivo: ---------------")
+        
+                print("1)Dificil (2 Intentos) \n2)Normal (5 Intentos) \n3)Facil (10 Intentos) \n4)Salir")
+                valorComp=input("Ingrese------->")
+                while valorMenu not in ["1","2","3","4"]:
+                    valorComp=input("Valor Dificultad incorrecto \nIngrese nuevamente valor de dificultad------->")
+                if valorComp==4:
+                    seIngresa=False
+                    modoCompetitivo=False       
             valorMenu="2"
+
+
+            
+            
 
         if seIngresa==True:
             valorMenu=dificultad[int(valorMenu)-1] #---------------------------------Guardamos cuantos intentos tenermos
@@ -80,13 +93,13 @@ def run():
             #------------------------------------------------------------------------Forma hombre colgado
     
             hombreColgado=[["=" *10],
-               ["||","\t ",caracteres[0]],
-               ["||","\t ",caracteres[1]],
-               ["||","\t ",caracteres[2]],
-               ["||","\t ",caracteres[3]],
-               ["||","\t",caracteres[4],caracteres[5],caracteres[6]],
-               ["||","\t ",caracteres[7]],
-               ["||","\t",caracteres[8]," "+caracteres[9]]]
+               ["||\t ",caracteres[0]],
+               ["||\t ",caracteres[1]],
+               ["||\t ",caracteres[2]],
+               ["||\t ",caracteres[3]],
+               ["||\t",caracteres[4],caracteres[5],caracteres[6]],
+               ["||\t ",caracteres[7]],
+               ["||\t",caracteres[8]," "+caracteres[9]]]
             for i in range(len(hombreColgado)): #------------------------------------Mostramos el hombre colgado
                 print("".join(hombreColgado[i]))
 
