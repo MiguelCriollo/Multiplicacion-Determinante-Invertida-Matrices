@@ -10,6 +10,8 @@ def read():
 
 #///////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\
 caracteresHombreColgado="|||O/|\\|/\\"
+
+
 #//////////////Se valida la letra leida, no sale de bucle hasta que sea correcta\\\\\\\\\
 def validacionLetra(letrasRepetidas):
     while True:
@@ -24,19 +26,23 @@ def validacionLetra(letrasRepetidas):
             return letraIngresada #La letra es valida
 #//////////////////////////--------------------------------\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
+
 #///////////////////////////Randomizacion de palabra\\\\\\\\\\\\\\\\\\\\\\\
 def generar_Palabra(lista): #De la lista generada seleccionamos aleatoriamente una palabra
     return choice(lista)
 #//////////////////////////------------------------------------\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
+
+
 #/////////////////////////////------Main-----------\\\\\\\\\\\\\\
 def run():
     #os.system("cls") #--------------------------------------------------------------------Para limpiar datos en consola
-    listaPalabras=read() #---------------------------------------------------------------Lectura del archivo txt de las palabras posibles
+    listaPalabras=read() #---------------------------------------------------------------Lectura del archivo txt de todas las palabras posibles
     dificultad=[2,5,10] #----------------------------------------------------------------Guarda valor de se elije facil, norma o dificil
     letrasRepetidas=[] #-----------------------------------------------------------------Lista donde se guardan letras correcta o incorrectas que ya han sido ingresadas
     print("|Bienvenido a el juego del ahorcado|")
     while True:#-------------------------------------------------------------------------Bucle principal, sale solamente si se ingresa desde el menu
+
         seIngresa=True
         modoCompetitivo=False
         contadorCompetitivo=3
@@ -64,9 +70,10 @@ def run():
         
                 print("1)Dificil (2 Intentos) \n2)Normal (5 Intentos) \n3)Facil (10 Intentos) \n4)Salir")
                 valorComp=input("Ingrese------->")
-                while valorMenu not in ["1","2","3","4"]:
+                print(valorComp, type)
+                while valorComp not in ["1","2","3","4"]:
                     valorComp=input("Valor Dificultad incorrecto \nIngrese nuevamente valor de dificultad------->")
-                if valorComp==4:
+                if valorComp=="4":
                     seIngresa=False
                     modoCompetitivo=False       
             valorMenu="2"
