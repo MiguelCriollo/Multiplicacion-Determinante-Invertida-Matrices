@@ -164,6 +164,13 @@ def run():
                         palabra_a_revelar[x]=y #-----------------------------------------Colocamos la letra resuelta 
                 print(f"Intentos restantes -----> {valorMenu}")
             #------------------------------------------------------------------------Este bucle sirve para colocar las partes del ahorcado dependiendo de su dificultad
-            
+
+def testTxt():
+    with open('puntajesGlobales.txt', 'r') as f:
+        lineas = f.readlines()
+    for i,linea in enumerate(lineas):
+        print(i,".-",linea)
+
+           
 if __name__== '__main__':
-    run()
+    testTxt()
