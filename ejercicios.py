@@ -1,4 +1,5 @@
 import os
+import sqlite3
 from random import choice
 
 #////////////Para leer el archivo txt\\\\\\\\\\\\\\\\\\
@@ -166,10 +167,18 @@ def run():
             #------------------------------------------------------------------------Este bucle sirve para colocar las partes del ahorcado dependiendo de su dificultad
 
 def testTxt():
-    with open('puntajesGlobales.txt', 'r') as f:
-        lineas = f.readlines()
-    for i,linea in enumerate(lineas):
-        print(i,".-",linea)
+    conn = sqlite3.connect('test.db')
+    cursor = conn.cursor()
+
+# Ejecutar la sentencia SQL
+    cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
+
+# Obtener los resultados de la consulta
+    tablas = cursor.fetchall()
+
+# Imprimir los nombres de las tablas
+    for tabla in tablas:
+        print(tabla[0])
 
            
 if __name__== '__main__':

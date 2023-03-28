@@ -1,3 +1,3 @@
-Miguel;1000
-Andres;1001
-Juan;1002
+{"Miguel",1000}
+{"Andres",1001}
+{"Juan",1002}
